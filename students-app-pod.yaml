@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: students-app
+  labels:
+    app: students-app
+spec:
+  containers:
+  - name: students-angular-app
+    image: dockerrajmanda/students-angular-app:latest
+  dnsPolicy: Default    

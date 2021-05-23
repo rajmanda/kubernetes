@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: students-app-service
+  labels:
+    app: students-app-deployment
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+    nodePort: 30005
+  selector:
+    app: students-app-deployment
+  type: NodePort
+status:
+  loadBalancer: {}

@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: students-app-deployment
+  name: students-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: students-app-deployment
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: students-app-deployment
+    spec:
+      containers:
+      - image: dockerrajmanda/students-angular-app:v1
+        name: students-angular-app
+        resources: {}
+status: {}

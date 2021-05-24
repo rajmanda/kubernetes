@@ -70,7 +70,7 @@ spec:
         app: students-app-deployment
     spec:
       containers:
-      - image: dockerrajmanda/students-angular-app:v3
+      - image: dockerrajmanda/students-angular-app:v4
         name: students-angular-app
         imagePullPolicy: Always
         ports:

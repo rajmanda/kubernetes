@@ -18,8 +18,9 @@ spec:
         app: students-api-deployment
     spec:
       containers:
-      - image: dockerrajmanda/students-express-server:latest
+      - image: dockerrajmanda/students-express-server:v1
         name: students-express-server
+        imagePullPolicy: Always
         ports:
         - containerPort: 3000
         resources: {}

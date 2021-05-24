@@ -6,9 +6,9 @@ metadata:
     app: students-app-deployment
 spec:
   ports:
-  - port: 80
+  - port: 4200
     protocol: TCP
-    targetPort: 80
+    targetPort: 4200
     nodePort: 30005
   selector:
     app: students-app-deployment

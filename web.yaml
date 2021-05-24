@@ -1,0 +1,98 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: students-api-deployment
+  name: students-api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: students-api-deployment
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: students-api-deployment
+    spec:
+      containers:
+      - image: dockerrajmanda/students-express-server:v1
+        name: students-express-server
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+        resources: {}
+      hostNetwork: true
+      dnsPolicy: "None"  
+      dnsConfig:
+        nameservers:
+         - 8.8.8.8  
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: students-api-deployment
+  name: students-api-service
+spec:
+  ports:
+  - port: 3000
+    protocol: TCP
+    targetPort: 3000
+    nodePort: 30004
+  selector:
+    app: students-api-deployment
+  type: NodePort   
+status:
+  loadBalancer: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: students-app-deployment
+  name: students-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: students-app-deployment
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: students-app-deployment
+    spec:
+      containers:
+      - image: dockerrajmanda/students-angular-app:v3
+        name: students-angular-app
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 4200        
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: students-app-service
+  labels:
+    app: students-app-deployment
+spec:
+  ports:
+  - port: 4200
+    protocol: TCP
+    targetPort: 4200
+    nodePort: 30005
+  selector:
+    app: students-app-deployment
+  type: NodePort
+status:
+  loadBalancer: {}
+---

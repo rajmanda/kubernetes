@@ -53,7 +53,7 @@ spec:
     protocol: TCP
     targetPort: 8080
   selector:
-    run: web
+    run: web1
   type: NodePort
 ---
 apiVersion: v1

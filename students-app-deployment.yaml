@@ -21,5 +21,7 @@ spec:
       - image: dockerrajmanda/students-angular-app:v3
         name: students-angular-app
         imagePullPolicy: Always
+        ports:
+        - containerPort: 4200         
         resources: {}
 status: {}

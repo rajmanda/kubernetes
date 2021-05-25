@@ -89,15 +89,15 @@ spec:
         - containerPort: 80
         readinessProbe:
           httpGet:
-            path: /profiles
+            path: /
             port: 80
-          initialDelaySeconds: 5
+          initialDelaySeconds: 60
           periodSeconds: 10
         livenessProbe:
           httpGet:
-            path: /home
+            path: /
             port: 80
-          initialDelaySeconds: 5
+          initialDelaySeconds: 60
           periodSeconds: 10                
         resources: {}
 status: {}

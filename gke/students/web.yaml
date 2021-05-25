@@ -18,7 +18,7 @@ spec:
         app: students-api-deployment
     spec:
       containers:
-      - image: dockerrajmanda/students-express-server:v1
+      - image: dockerrajmanda/students-express-server:v4
         name: students-express-server
         imagePullPolicy: Always
         ports:
@@ -89,13 +89,13 @@ spec:
         - containerPort: 80
         readinessProbe:
           httpGet:
-            path: /profiles
+            path: /
             port: 80
           initialDelaySeconds: 5
           periodSeconds: 10
         livenessProbe:
           httpGet:
-            path: /home
+            path: /
             port: 80
           initialDelaySeconds: 5
           periodSeconds: 10                

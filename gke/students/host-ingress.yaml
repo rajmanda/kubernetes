@@ -17,4 +17,4 @@ spec:
       - path: /app
         frontend:
           serviceName: students-app-service
-          servicePort: 4200
+          servicePort: 80

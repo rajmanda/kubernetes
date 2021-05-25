@@ -7,14 +7,12 @@ spec:
   - host: "studentsapi.com"
     http:
       paths:
-      - path: /api
-        backend:
+      - backend:
           serviceName: students-api-service
           servicePort: 3000
   - host: "studentsapp.com"
     http:
       paths:
-      - path: /app
-        frontend:
+      - backend:
           serviceName: students-app-service
           servicePort: 80

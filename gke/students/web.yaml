@@ -23,6 +23,18 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
+        readinessProbe:
+          httpGet:
+            path: /students
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /students
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 10            
         resources: {}
       hostNetwork: true
       dnsPolicy: "None"  
@@ -74,7 +86,19 @@ spec:
         name: students-angular-app
         imagePullPolicy: Always
         ports:
-        - containerPort: 4200        
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /profiles
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /home
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10                
         resources: {}
 status: {}
 ---

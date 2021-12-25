@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: students-api-deployment
+  name: students-api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: students-api-deployment
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: students-api-deployment
+    spec:
+      containers:
+      - image: dockerrajmanda/students-express-server:v4
+        name: students-express-server
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+        readinessProbe:
+          httpGet:
+            path: /students
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /students
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 10            
+        resources: {}
+      hostNetwork: true
+      dnsPolicy: "None"  
+      dnsConfig:
+        nameservers:
+         - 8.8.8.8  
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: students-api-deployment
+  name: students-api-service
+spec:
+  ports:
+  - port: 3000
+    protocol: TCP
+    targetPort: 3000
+    nodePort: 30004
+  selector:
+    app: students-api-deployment
+  type: NodePort   
+status:
+  loadBalancer: {}

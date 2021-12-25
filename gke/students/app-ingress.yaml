@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: host-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+spec:
+  rules:
+  - host: "studentsapp.com"
+    http:
+      paths:
+      - backend:
+          serviceName: students-app-service
+          servicePort: 80

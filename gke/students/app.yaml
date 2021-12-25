@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: students-app-deployment
+  name: students-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: students-app-deployment
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: students-app-deployment
+    spec:
+      containers:
+      - image: dockerrajmanda/students-angular-app:v4
+        name: students-angular-app
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 60
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 60
+          periodSeconds: 10                
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: students-app-service
+  labels:
+    app: students-app-deployment
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+    nodePort: 30005
+  selector:
+    app: students-app-deployment
+  type: NodePort
+status:
+  loadBalancer: {}
+---
